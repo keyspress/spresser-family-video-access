@@ -8,6 +8,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from '@aws-amplify/ui-react';
+import { StorageBrowser } from "@/components/StorageBrowser";
 
 Amplify.configure(outputs);
 
@@ -36,8 +37,13 @@ export default function App() {
     <Authenticator>
       {({ signOut, user }) => (
         <main>
-          <h1>Hello {user?.username}</h1>
+          <h1>Access granted: {user?.signInDetails?.loginId}</h1>
           <button onClick={signOut}>Sign out</button>
+          <h5>User Id: {user?.userId}</h5>
+
+          {/* StorageBrowser Component */}
+          <h2>Files</h2>
+          <StorageBrowser />
         </main>
       )}
     </Authenticator>
